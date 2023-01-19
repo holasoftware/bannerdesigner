@@ -1,0 +1,502 @@
+
+/*--------------------
+        Form
+---------------------*/
+
+.form {
+  position: relative;
+  max-width: 100%;
+}
+
+/*--------------------
+        Content
+---------------------*/
+
+.form > p.form-text, .form .fields > p.form-text {
+  margin: 1em 0;
+}
+
+.form .help-text {
+    margin: 0;
+}
+
+.form .form-message {
+}
+
+.form .form-message.form-message-error {
+}
+
+.form .form-message.form-message-success {
+}
+
+/*--------------------
+        Field
+---------------------*/
+
+.form .field {
+    display: block;
+    position: relative;
+    clear: both;
+    margin: 0 0 1em;
+}
+
+.form .fields {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 2em 0;
+}
+
+.form .fields > .form-row {
+    display: flex;
+    margin: 0 0 1em 0;
+}
+
+.form > .field.inline-field, .form .fields > .field.inline-field {
+  margin-bottom: 2em;
+}
+
+.form > .field:last-child, .form .fields > .field:last-child, .form > .field.inline-field:last-child, .form .fields > .field.inline-field:last-child {
+  margin-bottom: 0;
+}
+
+.form .field > label {
+  display: block;
+  margin: 0 0 0.2em 0;
+  font-weight: bold;
+  vertical-align: top;
+  color: #333;
+}
+
+/*--------------------
+        Labels
+---------------------*/
+
+
+.form label, .form .label {
+  font-size: 0.9em;
+  color: rgba(0, 0, 0, 0.87);
+  text-transform: none;
+}
+
+.form input[type="checkbox"] + label, .form input[type="radio"] + label {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.form input:not([type]),
+.form input[type="text"],
+.form input[type="password"],
+.form input[type="email"],
+.form input[type="url"],
+.form input[type="date"],
+.form input[type="month"],
+.form input[type="time"],
+.form input[type="datetime"],
+.form input[type="datetime-local"],
+.form input[type="week"],
+.form input[type="number"],
+.form input[type="search"],
+.form input[type="tel"],
+.form input[type="color"],
+.form select,
+.form textarea {
+    margin: 0;
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+/* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
+/* May be able to remove this tweak as color inputs become more standardized across browsers. */
+.form input[type="color"] {
+    margin: 0;
+    padding: 0.2em 0.5em;
+}
+
+
+.form input:not([type]):focus,
+.form input[type="text"]:focus,
+.form input[type="password"]:focus,
+.form input[type="email"]:focus,
+.form input[type="url"]:focus,
+.form input[type="date"]:focus,
+.form input[type="month"]:focus,
+.form input[type="time"]:focus,
+.form input[type="datetime"]:focus,
+.form input[type="datetime-local"]:focus,
+.form input[type="week"]:focus,
+.form input[type="number"]:focus,
+.form input[type="search"]:focus,
+.form input[type="tel"]:focus,
+.form input[type="color"]:focus,
+.form select:focus,
+.form textarea:focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+
+.form input[type="file"]:focus,
+.form input[type="radio"]:focus,
+.form input[type="checkbox"]:focus {
+    outline: thin solid #129FEA;
+    outline: 1px auto #129FEA;
+}
+.form .checkbox,
+.form .radio {
+    margin: 0.5em 0;
+    display: block;
+}
+
+.form input[type="text"][disabled],
+.form input[type="password"][disabled],
+.form input[type="email"][disabled],
+.form input[type="url"][disabled],
+.form input[type="date"][disabled],
+.form input[type="month"][disabled],
+.form input[type="time"][disabled],
+.form input[type="datetime"][disabled],
+.form input[type="datetime-local"][disabled],
+.form input[type="week"][disabled],
+.form input[type="number"][disabled],
+.form input[type="search"][disabled],
+.form input[type="tel"][disabled],
+.form input[type="color"][disabled],
+.form select[disabled],
+.form textarea[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+
+/*
+.form input[type=text]:hover, .form input[type=email]:hover, .form input[type=password]:hover, .form textarea:hover, .form input[type=submit]:hover, .form button:hover, .form input[type=radio]:hover:before, .form input[type=checkbox]:hover:before, .form select:hover {
+	-webkit-box-shadow: #363 0 0 3px;
+	box-shadow: #363 0 0 3px;
+	-moz-box-shadow: #363 0 0 3px;
+	color: #629262;
+}*/
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.form input:not([type])[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+.form input[readonly],
+.form select[readonly],
+.form textarea[readonly] {
+    background-color: #eee; /* menu hover bg color */
+    color: #777; /* menu text color */
+    border-color: #ccc;
+}
+
+.form input:focus:invalid,
+.form textarea:focus:invalid,
+.form select:focus:invalid {
+    color: #b94a48;
+    border-color: #e9322d;
+}
+.form input[type="file"]:focus:invalid:focus,
+.form input[type="radio"]:focus:invalid:focus,
+.form input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;
+}
+.form select {
+    /* Normalizes the height; padding is not sufficient. */
+    height: 2.25em;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+.form select[multiple] {
+    height: auto;
+}
+
+.form fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.form fieldset + fieldset {
+    margin: 0;
+    padding-top: 0.75em;
+    border: 0;
+}
+
+.form fieldset .description {
+    margin: 0;
+    margin-bottom: 2.2em;
+    padding: 0;
+}
+
+.form legend {
+    display: block;
+    width: 100%;
+    padding: 0 0 0.3em 0;
+    margin-bottom: 0.3em;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+.form.form-aligned input,
+.form.form-aligned textarea,
+.form.form-aligned select,
+.form.form-aligned .form-message {
+    display: inline-block;
+}
+
+.form.form-aligned input {
+    vertical-align: middle;
+    width: auto;
+}
+
+.form.form-aligned textarea {
+    vertical-align: top;
+    width: 100%;
+}
+
+.form.form-aligned select {
+    vertical-align: middle;
+    width: auto;
+}
+
+.form.form-aligned .form-message {
+    vertical-align: middle;
+}
+
+
+/* Aligned Forms */
+.form.form-aligned > .field {
+    margin-bottom: 0.5em;
+    display: flex;
+}
+.form.form-aligned > .field > label {
+    text-align: right;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: normal;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin: 0 1em 0 0;
+}
+
+.form.form-aligned > .field > label + .form-input-aligned {
+    display: flex;
+    flex-basis: 0;
+    flex-grow: 5;
+    flex-shrink: 1;
+}
+
+/*
+.form.form-aligned > .field > label + .form-input-aligned >.field:not(:last-child) {
+    margin-right: .75em;
+}
+
+.form.form-aligned > .field > label + .form-input-aligned > .field {
+    flex-grow: 1;
+    flex-shrink: 1;
+}*/
+
+.form.form-aligned .form-controls {
+    margin: 1.5em 0 0 11em;
+}
+
+/* Rounded Inputs */
+.form input.input-rounded,
+.form .input-rounded {
+    border-radius: 2em;
+    padding: 0.5em 1em;
+}
+
+/* Inline help for forms */
+.form .form-message-inline {
+    display: inline-block;
+    padding-left: 0.3em;
+    vertical-align: middle;
+}
+
+/* Block help for forms */
+.form .form-message {
+    display: block;
+}
+
+.form .form-message, .form .form-message-inline {
+    color: #666;    
+    font-size: 0.875em;
+}
+
+.form ul.errorlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form ul.errorlist > li {
+    margin-top: 0.25em;
+    color: #f93d5c;
+}
+
+.form ul.errorlist > li:before  {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f071";
+    font-weight: 900;
+    margin-right: 0.25em;
+}
+
+/*-----------------------
+    Inline Block Fields
+------------------------*/
+
+.form .fields-group {
+  display: block;
+}
+
+
+.form .fields-group > .field {
+  display: inline-block;
+  position: relative;
+  clear: both;
+  margin: 0 0 1em;
+  margin-right: 1em;
+}
+
+.form .fields-group > .field:last-child {
+  margin-right: 0;
+}
+
+.form .fields-group > .fields-label {
+  display: inline-block;
+  width: auto;
+  margin: 0;
+  vertical-align: baseline;
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+
+.form .fields-group > .field > label {
+  display: block;
+  width: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: baseline;
+  font-weight: normal;
+}
+
+/* Input */
+.form .fields-group > .field > input,
+.form .fields-group > .field > select {
+  display: inline-block;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-size: 1em;
+}
+
+/* Label */
+.form .fields-group .field > :first-child {
+  margin: 0 0.8em 0 0;
+}
+.form .fields-group .field > :only-child {
+  margin: 0;
+}
+
+
+/*----------------
+    Inline Fields
+-------------------*/
+
+
+.form .inline-fields {
+  vertical-align: middle;
+  margin: 0 0 1em;
+  /* margin: 0 -0.5em 1em;*/
+  display: block;
+}
+
+
+.form .inline-fields > .field {
+  display: inline-block;
+  margin: 0 0 1.5em 0;
+  padding: 0 1em 0 0;
+
+/*
+  padding-left: 0.5em;
+  padding-right: 0.5em;*/
+}
+
+.form .field.inline-field {
+  display: inline-block;
+}
+
+.form .inline-fields > .field > label, .form .field.inline-field > label {
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 0.5em 0 0;
+  width: auto;
+  vertical-align: baseline;
+  font-size: 0.9em;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.form .inline-fields > .field > input,
+.form .inline-fields > .field > select,
+.form .inline-field.field > input,
+.form .inline-field.field > select {
+  display: inline-block;
+  width: auto;
+  margin: 0;
+  vertical-align: middle;
+  font-size: 1em;
+}
+
+
+.form .field .captchaanswerinput {
+    font-family: monospace;
+    width: 4em;
+    margin-left: 0.25em;
+}
+
+.form .field img.captcha {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+
+.pass_show{position: relative} 
+
+.pass_show .ptxt { 
+    position: absolute; 
+    top: 50%; 
+    right: 10px; 
+    z-index: 1; 
+    color: #f36c01; 
+    margin-top: -10px; 
+    cursor: pointer; 
+    transition: .3s ease all; 
+} 
+
+.pass_show .ptxt:hover{color: #333333;} 
+
+/*
+.form .form-controls.bottom-controls {
+    margin-top: 10px
+}
+*/
+
+.form .form-buttons .btn + .btn {
+    margin-left: 7px;
+}
+
