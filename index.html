@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/flexboxgrid.css"/>
     <link rel="stylesheet" href="css/forms.css"/>
     <link rel="stylesheet" href="css/btn.css"/>
+    <link rel="stylesheet" href="css/pure_css_checkbox.css"/>
+
     <link rel="stylesheet" href="css/banner_designer.css"/>
 
     <template id="text_layer_form">
@@ -44,8 +46,11 @@
                         <div class="col-xs-4">
                             <input type="color" class="form-control" name="layer{layer_id}_background_color" id="layer{layer_id}_background_color">
                         </div>
-                        <div class="col-xs-8 vc">
-                            <label><input checked type="checkbox" name="layer{layer_id}_bg_transparent" id="layer{layer_id}_bg_transparent" value="1"> Transparent</label>
+                        <div class="col-xs-8">
+                            <div class="pure-checkbox">
+                                <input checked type="checkbox" name="layer{layer_id}_bg_transparent" id="layer{layer_id}_bg_transparent" value="1">
+                                <label for="layer{layer_id}_bg_transparent"> Transparent</label>
+                            </div>
                         </div>
                     </div>
 
@@ -204,7 +209,7 @@
                     </div>
                     <div id="layer_form_box"></div>
                 </div>
-                <div id="banner-designer-form-right-side" class="col-xs-12 col-md-6">
+                <div id="banner_general_settings" class="col-xs-12 col-md-6">
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="field">
@@ -220,8 +225,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-3 vc">
-                            <label><input checked="" type="radio" name="background_type" value="image_with_overlay"> Background image with overlay</label>
+                        <div class="col-xs-3">
+                            <div class="pure-radiobutton">
+                                <input id="background_type_image_with_overlay" checked="" type="radio" name="background_type" value="image_with_overlay">
+                                <label for="background_type_image_with_overlay"> Background image with overlay</label>
+                            </div>
                         </div>
                         <div class="col-xs-9">
                             <div class="field">
@@ -276,8 +284,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-3 vc">
-                            <label><input type="radio" name="background_type" value="gradient"> Background gradient</label>
+                        <div class="col-xs-3">
+                            <div class="pure-radiobutton">
+                                <input id="background_type_gradient" type="radio" name="background_type" value="gradient">
+                                <label for="background_type_gradient"> Background gradient</label>
+                            </div>
                         </div>
                         <div class="col-xs-9">
                             <div class="row">
@@ -330,7 +341,10 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="field">
-                                <label style="font-weight: normal"><input type="checkbox" name="set_current_layer_on_click" id="set_current_layer_on_click"> Set current layer on click</label>
+                                <div class="pure-checkbox">
+                                    <input type="checkbox" name="set_current_layer_on_click" id="set_current_layer_on_click" checked="checked">
+                                    <label style="font-weight: normal" for="set_current_layer_on_click"> Set current layer on click</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -347,7 +361,7 @@
     </div>
 </div> <!-- /banner-wrap -->
 
-<div id="banner_bottom_actions"><button id="create_image_btn" type="button" href="#" class="btn btn-primary prepare">Create image to download</button><a id="download_image_btn_link" type="button" href="#" style="display: none" class="btn btn-success download" download="banner.jpg" href="#">Download Image</a><button id="import_btn" type="button" href="#" class="btn btn-success" href="#">Import</button><a id="export_btn" href="#" class="btn btn-success download" download="data.json" href="#">Export</a></div>
+<div id="banner_bottom_actions"><button id="create_image_btn" type="button" href="#" class="btn btn-primary prepare">Convert to image</button><a id="download_image_btn_link" type="button" href="#" style="display: none" class="btn btn-success download" download="banner.png" href="#">Download Image</a><button id="import_btn" type="button" href="#" class="btn btn-success" href="#">Import</button><a id="export_btn" href="#" class="btn btn-success download" download="data.json" href="#">Export</a></div>
 </div>
 
 <script src="libs/jquery-3.6.0.js" type="text/javascript"></script>

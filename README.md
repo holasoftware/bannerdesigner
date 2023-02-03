@@ -1,7 +1,7 @@
 Banner Designer
 ---------------
 
-Version: 0.2
+Version: 0.3
 
 Easy banner designer using draggable layers.
 
@@ -19,3 +19,8 @@ Features:
 
 
 Try here: https://holasoftware.github.io/bannerdesigner/
+
+Notes
+-----
+For the conversion of the banner to an image, it's required that the images comes from the same origin. One possiblity for using images from different origins in the banner design is to use a proxy web.
+

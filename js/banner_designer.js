@@ -595,9 +595,9 @@
             bg_transparent = config.bg_transparent;
 
             if (bg_transparent){
-                $bg_transparent_input.attr('checked','checked');
+                $bg_transparent_input.get(0).checked = true;
             } else {
-                $bg_transparent_input.removeAttr('checked');
+                $bg_transparent_input.get(0).checked = false;
             }
         } else {
             bg_transparent = $bg_transparent_input.is(":checked");
@@ -703,6 +703,8 @@
         this.$downloadBannerLink = $("#download_image_btn_link");
 
         this.$createImageBtn = $('#create_image_btn');
+
+        this.$bannerGeneralSettings = $("#banner_general_settings");
 
         this.setCurrentLayerOnclick = false;
 
@@ -877,8 +879,8 @@
                         self.onNewImageCreated(blob);
                     });
                 }
-                // "image/png"
-                self.$downloadBannerLink.attr("href", canvas.toDataURL("image/jpeg", 1.0));
+                // "image/jpeg"
+                self.$downloadBannerLink.attr("href", canvas.toDataURL("image/png", 1.0));
                 // $(window).scrollTop(s);
                 self.$downloadBannerLink.show();
             });
@@ -938,6 +940,7 @@
         this.$bannerWidthInput.on("input propertychange", function () {
             var widthValue = $(this).val().trim();
 
+            console.log("widthValue, self._height, self._naturalWidth, self._naturalHeight", widthValue, self._height, self._naturalWidth, self._naturalHeight);
             if (widthValue){
                 widthValue = parseInt(widthValue);
                 if (isNaN(widthValue)) return;
@@ -1066,6 +1069,7 @@
 
         this.$overlayGradientColor2Input.on("input propertychange", function () {
             if (self.backgroundType !== GRADIENT) return;
+            
             self.initializeOrUpdateGradientBackground();
         });
 
@@ -1154,20 +1158,20 @@
             layer.$layer.css("top", top);
         });
 
-        $("#banner-designer-form-right-side").on("input propertychange", "input, select, textarea", function(){
+        this.$bannerGeneralSettings.on("input propertychange", "input, select, textarea", function(){
             var input = this;
 
             self.eventManager.trigger("inputchange", {
-                'type': 'form_right_side_input_change',
+                'type': 'banner_general_settings_input_change',
                 'input': input
             });
         });
 
-        self.eventManager.on("inputchange", function(){
+        this.eventManager.on("inputchange", function(){
             self.$downloadBannerLink.hide();
         });
 
-        self.updateBannerBackground();
+        this.updateBannerBackground();
     };
 
     BannerDesigner.prototype.initCustomGetImageUrl = function($input, cb, initial_src){
@@ -1278,7 +1282,9 @@
 
         this.$banner.css("background-image", "url(" + imageurl + ")");
 
-        this._getBackgroundImageNaturalDimensions(imageurl, function(width, height){
+        this._getBackgroundImageNaturalDimensions(imageurl, function(naturalWidth, naturalHeight){
+            var width, height;
+
             if (self._width === null && self._height === null){
                 self._width = width;
                 self._height = height;
@@ -1289,12 +1295,14 @@
                 self.$banner.width(self._width);
                 self.$bannerWidthInput.val("");
             } else if (self._width === null){
-                self._width = Math.round( (self._height * width) /  height);
-                self.$banner.width(self._width);
+                width = Math.round( (self._height * naturalWidth) /  naturalHeight);
+
+                self.$banner.width(width);
                 self.$bannerWidthInput.val("");
             } else if (self._height === null){
-                self._height = Math.round( (self._width * height) /  width);
-                self.$banner.height(self._height);
+                height = Math.round( (self._width * naturalHeight) /  naturalWidth);
+
+                self.$banner.height(height);
                 self.$bannerHeightInput.val("");
             }
         });
@@ -1448,7 +1456,9 @@
         var overlayColor = this.$overlayColorInput.val().trim();
         var overlayOpacity = this.$overlayOpacityInput.val().trim();
         var overlayHeight = this.$overlayHeightInput.val().trim();
-        var overlayPosition = this.$overlayDockPositionInput.val().trim();
+        var overlayPosition = this.$overlayDockPositionInput.val();
+        if (overlayPosition)
+            overlayPosition = overlayPosition.trim();
 
         this.createImageOverlayBackground(imageurl, overlayColor, overlayOpacity, overlayPosition);
     }
@@ -1476,6 +1486,8 @@
         var self = this;
 
         this.reset();
+
+        console.log("importing banner...", data);
 
         if (data.banner_width){
             this.$bannerWidthInput.val(data.banner_width);
@@ -1516,9 +1528,9 @@
             this.setCurrentLayerOnClick = !!data.set_current_layer_on_click;
 
             if (this.setCurrentLayerOnClick){
-                this.$setCurrentLayerOnClickInput.attr('checked','checked');
+                this.$setCurrentLayerOnClickInput.get(0).checked = true;
             } else {
-                this.$setCurrentLayerOnClickInput.removeAttr('checked');
+                this.$setCurrentLayerOnClickInput.get(0).checked = false;
             }
         }
 
@@ -1650,8 +1662,8 @@
         var current_layer_index = this.layerOrderList.indexOf(this.currentLayerId);
         if (current_layer_index === -1) current_layer_index = null;
 
-        var banner_width = this.$bannerWidthInput.val();
-        var banner_height = this.$bannerHeightInput.val();
+        var banner_width = this.$bannerWidthInput.val().trim() || null;
+        var banner_height = this.$bannerHeightInput.val().trim() || null;
 
         var background_type = this.$backgroundTypeInput.filter(":checked").val();
         var banner_src = this.$bannerSrcInput.val();

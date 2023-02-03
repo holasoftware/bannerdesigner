@@ -209,14 +209,14 @@ h3 {
 }
 
 .icon.horizontal-center-icon {
-    background-image: url(../icons/Horizontal-center-01.svg);
+    background-image: url(../icons/Horizontal-center.svg);
     width: 22px;
     height: 22px;
 
 }
 
 .icon.vertical-center-icon {
-    background-image: url(../icons/Vertical-center-01.svg);
+    background-image: url(../icons/Vertical-center.svg);
     width: 21px;
     height: 21px;
 }

@@ -1,0 +1,40 @@
+.banner[data-banner] {
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: none;
+}
+
+.banner[data-banner] .banner_overlay {
+    position: absolute;
+    top:0px;
+    left:0px;
+    background-color: #000;
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
+
+.banner[data-banner] .layer {
+    position: absolute;
+    z-index: 1;
+    margin: 0 !important;
+    border-style: solid;
+    width: auto;
+    background-color: transparent;
+    border-width: 0;
+    padding: 0;
+}
+
+.banner[data-banner] .layer.layer-type-image {
+    border: 0;
+}
+
+.banner[data-banner] .layer.layer-type-image img {
+    width: auto;
+    height: auto;
+}
+
