@@ -367,9 +367,10 @@
     ImageLayer.prototype._updateImageSrc = function(src){
         if (src){
             this.$layer.show();
+            src = this.bannerDesigner.doImageUrlHook(src)
             this.$layer.$image.attr("src", src);
-            this.fixTopPositionOutsideBorders();
-            this.fixLeftPositionOutsideBorders();
+            // TODO: Investigar si se requiere tener la imagen cargada para fijar la posicion del layer fuera de los bordes
+            this.fixPositionOutsideBorders();
         } else {
             this.$layer.hide();
         }
@@ -726,6 +727,19 @@
         this.onGetImageUrl = options.onGetImageUrl || null;
         this.useCustomImageUrlGetter = this.onGetImageUrl !== null;
 
+        if (options.imageUrlHook){
+            if (typeof options.imageUrlHook === 'string'){
+                this.imageUrlHook = function(url){
+                    url = options.imageUrlHook.replace('{url}', url);
+                    return url;
+                }
+            } else {
+                this.imageUrlHook = imageUrlHook;
+            }
+        } else {
+            this.imageUrlHook = null;
+        }
+
         var self = this;
         if (this.onChange){
             this.eventManager.on("inputchange", function(){
@@ -940,7 +954,6 @@
         this.$bannerWidthInput.on("input propertychange", function () {
             var widthValue = $(this).val().trim();
 
-            console.log("widthValue, self._height, self._naturalWidth, self._naturalHeight", widthValue, self._height, self._naturalWidth, self._naturalHeight);
             if (widthValue){
                 widthValue = parseInt(widthValue);
                 if (isNaN(widthValue)) return;
@@ -1272,6 +1285,14 @@
         return $imageSrcHiddenInput;
     }
 
+    BannerDesigner.prototype.doImageUrlHook = function(url){
+        if (this.imageUrlHook){
+            return this.imageUrlHook(url)
+        }
+        
+        return url;
+    }
+
     BannerDesigner.prototype.setBannerSrc = function(imageurl){
         var self = this;
 
@@ -1280,19 +1301,17 @@
             return;
         }
 
+        imageurl = this.doImageUrlHook(imageurl);
         this.$banner.css("background-image", "url(" + imageurl + ")");
 
         this._getBackgroundImageNaturalDimensions(imageurl, function(naturalWidth, naturalHeight){
             var width, height;
 
             if (self._width === null && self._height === null){
-                self._width = width;
-                self._height = height;
-
                 // TODO: Mejorar para hacerlo mas inteligente
-                self.$banner.height(self._height);
+                self.$banner.height(naturalHeight);
                 self.$bannerHeightInput.val("");
-                self.$banner.width(self._width);
+                self.$banner.width(naturalWidth);
                 self.$bannerWidthInput.val("");
             } else if (self._width === null){
                 width = Math.round( (self._height * naturalWidth) /  naturalHeight);

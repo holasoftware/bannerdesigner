@@ -1,7 +1,7 @@
 Banner Designer
 ---------------
 
-Version: 0.3
+Version: 0.4
 
 Easy banner designer using draggable layers.
 
@@ -22,5 +22,12 @@ Try here: https://holasoftware.github.io/bannerdesigner/
 
 Notes
 -----
-For the conversion of the banner to an image, it's required that the images comes from the same origin. One possiblity for using images from different origins in the banner design is to use a proxy web.
+For the conversion of the banner to an image, it's required that the images comes from the same origin. 
+
+For local files, you can use a local web server. For example:
+
+    python -m http.server
+    
+For images from a different host, one possiblity is to use a proxy web. There is a hook to convert the image urls to another one proxified. The option `imageUrlHook` in the
+ settings of BannerDesigner class could be a template url containing the placeholder '{url}' for the replacement of the url intended to proxify (for example in the query string), or a function making the conversion to the proxified url. 
 
