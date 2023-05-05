@@ -7,6 +7,351 @@
     var IMAGE_WITH_OVERLAY = 0;
     var GRADIENT = 1;
 
+    var TEXT_LAYER_FORM_TEMPLATE =`
+<div id="layer_form{layer_id}" class="layer-form text-layer-form" date-layer-id="{layer_id}">
+    <div class="row">
+        <div class="col-xs-12">
+        <div class="field inline-field" style="display:flex;">
+            <label style="flex-grow: 0">Layer name</label>
+            <input type="text" value="" class="form-control" id="layer{layer_id}_name" name="layer{layer_id}_name" style="flex-grow: 1">
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+        <div class="field">
+            <label>Text</label>
+            <textarea class="form-control" name="layer{layer_id}_text" id="layer{layer_id}_text" rows="2"></textarea>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Width</label>
+                <input type="text" class="form-control" name="layer{layer_id}_width" id="layer{layer_id}_width">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Background color</label>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <input type="color" class="form-control" name="layer{layer_id}_background_color" id="layer{layer_id}_background_color">
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="pure-checkbox">
+                            <input checked type="checkbox" name="layer{layer_id}_bg_transparent" id="layer{layer_id}_bg_transparent" value="1">
+                            <label for="layer{layer_id}_bg_transparent"> Transparent</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Text color</label>
+                <input type="color" class="form-control" name="layer{layer_id}_color" id="layer{layer_id}_color">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Padding</label>
+                <input type="text" class="form-control" name="layer{layer_id}_padding" id="layer{layer_id}_padding">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Font size</label>
+                <input type="text" class="form-control" name="layer{layer_id}_font_size" id="layer{layer_id}_font_size">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Font family</label>
+                <input type="text" class="form-control" name="layer{layer_id}_font_family" id="layer{layer_id}_font_family">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Line height</label>
+                <input type="text" class="form-control" name="layer{layer_id}_line_height" id="layer{layer_id}_line_height">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Text alignment</label>
+                <select class="form-control" name="layer{layer_id}_text_align" id="layer{layer_id}_text_align">
+                    <option value="left">Left</option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Border width</label>
+                <input type="text" class="form-control" name="layer{layer_id}_border_width" id="layer{layer_id}_border_width">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Border color</label>
+                <input type="color" class="form-control" name="layer{layer_id}_border_color" id="layer{layer_id}_border_color">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Border radius</label>
+                <input type="text" class="form-control" name="layer{layer_id}_border_radius" id="layer{layer_id}_border_radius">
+            </div>
+        </div>
+
+    </div>
+</div>`;
+
+    var IMAGE_LAYER_FORM_TEMPLATE = `
+<div id="layer_form{layer_id}" class="layer-form image-layer-form" data-layer-id="{layer_id}">
+    <div class="row">
+        <div class="col-xs-12">
+        <div class="field inline-field" style="display:flex;">
+            <label style="flex-grow: 0">Layer name</label>
+            <input type="text" value="" class="form-control" id="layer{layer_id}_name" name="layer{layer_id}_name" style="flex-grow: 1">
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Width</label>
+                <input value="" type="text" class="form-control" name="layer{layer_id}_width" id="layer{layer_id}_width">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="field">
+                <label>Height</label>
+                <input value="" type="text" class="form-control" name="layer{layer_id}_height" id="layer{layer_id}_height">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-9">
+            <div class="field">
+                <label>Image source url</label>
+                <input value="" type="text" class="form-control" name="layer{layer_id}_image_src" id="layer{layer_id}_image_src">
+
+            </div>
+        </div>
+    </div>
+</div>`;
+    
+    var BANNER_DESIGNER_INNER_HTML = `
+<div id="banner-designer">
+<div id="banner-designer-header" class="container">
+    <h1 class="title page-title">Banner Maker</h1>
+    <p id="banner-designer-description">Drag and place the text blocks, add image background, change color and font families and design beautiful banners instantly!</p>
+</div>
+
+<div id="banner_designer_form_wrap" class="form">
+    <form id="banner_designer_form">
+        <input id="import_input" type="file" name="import" style="display:none">
+        <div class="container">
+            <div class="row">
+                <div id="banner-designer-form-left-side" class="col-xs-12 col-md-6">
+                    <div class="field inline-field">Layer: <select class="form-control" id="layer_select"><option value="">-----</option></select></div> <div id="add_layer_btns"><div class="btn-group"><button id="add_text_layer_btn" type="button" class="btn btn-default">Add text layer</button><button id="add_image_layer_btn" type="button" class="btn btn-default">Add image layer</button></div></div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="layer_form_head">
+                                <div id="layer_id_wrap">
+                                    Layer <b>#<span id="layer_id_text"></span></b> (<span id="layer_type_span"></span>)
+                                </div>
+                                <div id="layer_generic_controls">
+                                    <div id="layer_stack_position_controls">
+    <span id="layer_stack_position">Position: <b id="stack_position_num"></b></span>
+                                       <button id="move_layer_up_btn" type="button" class="btn btn-default"><i class="fa fa-arrow-up" aria-hidden="true"></i></button><button id="move_layer_down_btn" type="button" class="btn btn-default" style="margin-left: 4px;"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                                       
+                                    </div>
+                                    <div id="layer_center_tools">
+                                       Tools: <button id="center_layer_horizontally_btn" type="button" class="btn btn-default"><i class="icon horizontal-center-icon" aria-hidden="true"></i></button><button id="center_layer_vertically_btn" type="button" class="btn btn-default" style="margin-left: 4px;"><i class="icon vertical-center-icon" aria-hidden="true"></i></button>
+                                    </div>
+                                    <button id="remove_layer_btn" class="btn btn-light ml-3"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="layer_form_box"></div>
+                </div>
+                <div id="banner_general_settings" class="col-xs-12 col-md-6">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="field">
+                                <label>Banner width</label>
+                                <input type="text" class="form-control" id="banner_width" name="banner_width">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="field">
+                                <label>Banner height</label>
+                                <input type="text" class="form-control" id="banner_height" name="banner_height">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="pure-radiobutton">
+                                <input id="background_type_image_with_overlay" checked="" type="radio" name="background_type" value="image_with_overlay">
+                                <label for="background_type_image_with_overlay"> Background image with overlay</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <div class="field">
+                                <label>Background image url</label>
+                                <input type="text" class="form-control" name="banner_src" id="banner_src">
+                            </div>
+                            <div class="field">
+                                <label>Background position</label>
+                                <select id="banner_bg_position" class="form-control" name="banner_bg_position">
+                                    <option value="center center">Center</option>
+                                    <option value="left top">Left Top</option>
+                                    <option value="left center">Left Center</option>
+                                    <option value="left bottom">Left Bottom</option>
+                                    <option value="right top">Right Top</option>
+                                    <option value="right center">Right Center</option>
+                                    <option value="right bottom">Right Bottom</option>
+                                    <option value="center top">Center Top</option>
+                                    <option value="center bottom">Center Bottom</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="field">
+                                        <label>Overlay color</label>
+                                        <input value="#000000" type="color" class="form-control" name="overlay_color" id="overlay_color">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="field">
+                                        <label>Overlay opacity</label>
+                                        <input type="range" min="0" max="1" step="0.01" class="form-control" name="overlay_opacity" id="overlay_opacity">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="field">
+                                        <label>Overlay height</label>
+                                        <input value="100%" type="text" class="form-control" name="overlay_height" id="overlay_height">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="field">
+                                        <label>Overlay position</label>
+                                        <select id="overlay_dock_position" class="form-control" name="overlay_dock_position">
+                                            <option value="top">Top</option>
+                                            <option value="bottom">Bottom</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="pure-radiobutton">
+                                <input id="background_type_gradient" type="radio" name="background_type" value="gradient">
+                                <label for="background_type_gradient"> Background gradient</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="field">
+                                        <label>Overlay gradient color 1</label>
+                                        <input value="#000000" type="color" class="form-control" name="overlay_gradient_color1" id="overlay_gradient_color1">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="field">
+                                        <label>Overlay gradient color 2</label>
+                                        <input value="#000000" type="color" class="form-control" name="overlay_gradient_color2" id="overlay_gradient_color2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Overlay gradient direction</label>
+                                <div id="overlay_gradient_direction">
+					                <input type="radio" name="overlay_gradient_direction" value="right top" name="overlay_gradient_direction1" id="overlay_gradient_direction1" checked="checked">
+					                <label for="overlay_gradient_direction1"><i class="fa fa-arrow-right degtop" aria-hidden="true"></i></label>
+					                
+					                <input type="radio" name="overlay_gradient_direction" value="right" name="overlay_gradient_direction2" id="overlay_gradient_direction2">
+					                <label for="overlay_gradient_direction2"><i class="fa fa-arrow-right" aria-hidden="true"></i></label>
+					                
+					                <input type="radio" name="overlay_gradient_direction" value="right bottom" name="overlay_gradient_direction3" id="overlay_gradient_direction3">
+					                <label for="overlay_gradient_direction3"><i class="fa fa-arrow-right degbot" aria-hidden="true"></i></label>
+					                
+					                <input type="radio" name="overlay_gradient_direction" value="bottom" name="overlay_gradient_direction4" id="overlay_gradient_direction4">
+					                <label for="overlay_gradient_direction4"><i class="fa fa-arrow-down" aria-hidden="true"></i></label>
+					                
+					                <input type="radio" name="overlay_gradient_direction" value="left bottom" name="overlay_gradient_direction5" id="overlay_gradient_direction5">
+					                <label for="overlay_gradient_direction5"><i class="fa fa-arrow-left degtop" aria-hidden="true"></i></label>
+					                
+					                <input type="radio" name="overlay_gradient_direction" value="left" name="overlay_gradient_direction6" id="overlay_gradient_direction6">
+					                <label for="overlay_gradient_direction6"><i class="fa fa-arrow-left" aria-hidden="true"></i></label>
+					                
+					                <input type="radio" name="overlay_gradient_direction" value="left top" name="overlay_gradient_direction7" id="overlay_gradient_direction7">
+					                <label for="overlay_gradient_direction7"><i class="fa fa-arrow-left degbot" aria-hidden="true"></i></label>
+					                
+					                <input type="radio" name="overlay_gradient_direction" value="top" name="overlay_gradient_direction8" id="overlay_gradient_direction8">
+					                <label for="overlay_gradient_direction8"><i class="fa fa-arrow-up" aria-hidden="true"></i></label>
+					                
+					                <input type="radio" name="overlay_gradient_direction" value="circle" name="overlay_gradient_direction9" id="overlay_gradient_direction9">
+					                <label for="overlay_gradient_direction9"><i class="fa fa-undo" aria-hidden="true"></i></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="field">
+                                <div class="pure-checkbox">
+                                    <input type="checkbox" name="set_current_layer_on_click" id="set_current_layer_on_click" checked="checked">
+                                    <label style="font-weight: normal" for="set_current_layer_on_click"> Set current layer on click</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- /container -->
+    </form>
+</div> <!-- /#banner-designer-controls -->
+<div id="layer_dragged_container">Layer dragged: <span id="layer_dragged_full_name_text">-</span></div>
+
+<div id="banner_wrap">
+    <div class="banner" id="banner">
+        <div class="banner_overlay" id="banner_overlay"></div>
+    </div>
+</div> <!-- /banner-wrap -->
+
+<div id="banner_bottom_actions"><button id="create_image_btn" type="button" href="#" class="btn btn-primary prepare">Convert to image</button><a id="download_image_btn_link" type="button" href="#" style="display: none" class="btn btn-success download" download="banner.png" href="#">Download Image</a><button id="import_btn" type="button" href="#" class="btn btn-success" href="#">Import</button><a id="export_btn" href="#" class="btn btn-success download" download="data.json" href="#">Export</a></div>
+</div>`;
+
     var inherits = (function () {
         var F = function () {};
 
@@ -632,7 +977,7 @@
     }
 
 
-    function BannerDesigner(options){
+    function BannerDesigner(el, options){
         if (options === undefined || options === null){
             options = $.extend({}, BannerDesigner.defaultValues);
         } else {
@@ -652,60 +997,65 @@
             });
         }
 
-        this.$bannerDesignerForm = $("#banner_designer_form");
+        var $el = $(el);
+        $el.html(BANNER_DESIGNER_INNER_HTML);
+        
+        this.$el = $el;
+
+        this.$bannerDesignerForm = $el.find("#banner_designer_form");
 
         this.layerFormTemplates = {
-            "text": $("#text_layer_form").html(),
-            "image": $("#image_layer_form").html()
+            "text": TEXT_LAYER_FORM_TEMPLATE,
+            "image": IMAGE_LAYER_FORM_TEMPLATE
         }
 
-        this.$banner = $("#banner");
-        this.$overlay = $("#banner_overlay");
+        this.$banner = $el.find("#banner");
+        this.$overlay = $el.find("#banner_overlay");
 
-        this.$layerFormHead = $("#layer_form_head");
+        this.$layerFormHead = $el.find("#layer_form_head");
 
-        this.$setCurrentLayerOnClickInput = $('#set_current_layer_on_click');
-        this.$layerIdText = $("#layer_id_text");
-        this.$layerTypeText = $("#layer_type_span");
-        this.$layerStackPositionNum = $("#stack_position_num");
-        this.$layerFormBox = $("#layer_form_box");
+        this.$setCurrentLayerOnClickInput = $el.find('#set_current_layer_on_click');
+        this.$layerIdText = $el.find("#layer_id_text");
+        this.$layerTypeText = $el.find("#layer_type_span");
+        this.$layerStackPositionNum = $el.find("#stack_position_num");
+        this.$layerFormBox = $el.find("#layer_form_box");
 
-        this.$centerLayerHorizontallyBtn = $("#center_layer_horizontally_btn");
-        this.$centerLayerVerticallyBtn = $("#center_layer_vertically_btn");
+        this.$centerLayerHorizontallyBtn = $el.find("#center_layer_horizontally_btn");
+        this.$centerLayerVerticallyBtn = $el.find("#center_layer_vertically_btn");
 
-        this.$layerSelect = $("#layer_select");
+        this.$layerSelect = $el.find("#layer_select");
 
-        this.$moveLayerUpBtn = $("#move_layer_up_btn");
-        this.$moveLayerDownBtn = $("#move_layer_down_btn");
+        this.$moveLayerUpBtn = $el.find("#move_layer_up_btn");
+        this.$moveLayerDownBtn = $el.find("#move_layer_down_btn");
 
-        this.$removeLayerBtn = $("#remove_layer_btn");
+        this.$removeLayerBtn = $el.find("#remove_layer_btn");
 
-        this.$bannerSrcInput = $("#banner_src");
-        this.$bannerWidthInput = $("#banner_width");
-        this.$bannerHeightInput = $("#banner_height");
-        this.$bannerBgPositionInput = $("#banner_bg_position");
-        this.$overlayColorInput = $("#overlay_color");
-        this.$overlayOpacityInput = $("#overlay_opacity");
-        this.$overlayHeightInput = $("#overlay_height");
-        this.$overlayDockPositionInput = $("#overlay_dock_position");
-        this.$backgroundTypeInput = this.$bannerDesignerForm.find("input[name=background_type]");
-        this.$overlayGradientColor1Input = $("#overlay_gradient_color1");
-        this.$overlayGradientColor2Input = $("#overlay_gradient_color2");
-        this.$overlayGradientDirectionInput = this.$bannerDesignerForm.find(
+        this.$bannerSrcInput = $el.find("#banner_src");
+        this.$bannerWidthInput = $el.find("#banner_width");
+        this.$bannerHeightInput = $el.find("#banner_height");
+        this.$bannerBgPositionInput = $el.find("#banner_bg_position");
+        this.$overlayColorInput = $el.find("#overlay_color");
+        this.$overlayOpacityInput = $el.find("#overlay_opacity");
+        this.$overlayHeightInput = $el.find("#overlay_height");
+        this.$overlayDockPositionInput = $el.find("#overlay_dock_position");
+        this.$backgroundTypeInput = $el.find("input[name=background_type]");
+        this.$overlayGradientColor1Input = $el.find("#overlay_gradient_color1");
+        this.$overlayGradientColor2Input = $el.find("#overlay_gradient_color2");
+        this.$overlayGradientDirectionInput = $el.find(
             "input[name=overlay_gradient_direction]");
         
-        this.$addTextLayerBtn = $("#add_text_layer_btn");
-        this.$addImageLayerBtn = $("#add_image_layer_btn");
+        this.$addTextLayerBtn = $el.find("#add_text_layer_btn");
+        this.$addImageLayerBtn = $el.find("#add_image_layer_btn");
 
-        this.$layerDraggedContainer = $("#layer_dragged_container");
-        this.$layerDraggedFullNameText = $("#layer_dragged_full_name_text");
-        this.$exportBtn = $("#export_btn");
-        this.$importBtn = $("#import_btn");
-        this.$downloadBannerLink = $("#download_image_btn_link");
+        this.$layerDraggedContainer = $el.find("#layer_dragged_container");
+        this.$layerDraggedFullNameText = $el.find("#layer_dragged_full_name_text");
+        this.$exportBtn = $el.find("#export_btn");
+        this.$importBtn = $el.find("#import_btn");
+        this.$downloadBannerLink = $el.find("#download_image_btn_link");
 
-        this.$createImageBtn = $('#create_image_btn');
+        this.$createImageBtn = $el.find('#create_image_btn');
 
-        this.$bannerGeneralSettings = $("#banner_general_settings");
+        this.$bannerGeneralSettings = $el.find("#banner_general_settings");
 
         this.setCurrentLayerOnclick = false;
 
