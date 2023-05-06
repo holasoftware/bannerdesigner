@@ -1,8 +1,5 @@
 ;(function($, global){
-    var bannerDesigner = null;
-
     var _LAYER_ID = 1;
-
 
     var IMAGE_WITH_OVERLAY = 0;
     var GRADIENT = 1;
@@ -2085,10 +2082,8 @@
         this.layerClasses[layerType] = layerClass;
     }
 
-    BannerDesigner.init = function(options){
-        if (bannerDesigner !== null) throw "Banner designer already initialized";
-
-        bannerDesigner = new BannerDesigner(options);
+    BannerDesigner.init = function(el, options){
+        bannerDesigner = new BannerDesigner(el, options);
         return bannerDesigner;
     }
 
