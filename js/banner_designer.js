@@ -18,7 +18,7 @@
         <div class="col-xs-12">
         <div class="field">
             <label>Text</label>
-            <textarea class="form-control" name="layer{layer_id}_text" id="layer{layer_id}_text" rows="2"></textarea>
+            <textarea class="form-control text-layer-text-form-control" name="layer{layer_id}_text" id="layer{layer_id}_text" rows="2"></textarea>
         </div>
         </div>
     </div>
@@ -34,16 +34,24 @@
                 <label>Background color</label>
                 <div class="row">
                     <div class="col-xs-4">
-                        <input type="color" class="form-control" name="layer{layer_id}_background_color" id="layer{layer_id}_background_color">
+                        <input type="color" class="form-control text-layer-background-color-form-control" name="layer{layer_id}_background_color" id="layer{layer_id}_background_color">
                     </div>
                     <div class="col-xs-8">
                         <div class="pure-checkbox">
-                            <input checked type="checkbox" name="layer{layer_id}_bg_transparent" id="layer{layer_id}_bg_transparent" value="1">
+                            <input checked type="checkbox"
+                            class="text-layer-bg-transparent-form-control"
+                            name="layer{layer_id}_bg_transparent" id="layer{layer_id}_bg_transparent" value="1">
                             <label for="layer{layer_id}_bg_transparent"> Transparent</label>
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Opacity</label>
+                        <input type="range" min="0" max="1" step="0.01" value="1" class="form-control text-layer-bg-opacity-form-control"
+                        name="layer{layer_id}_bg_opacity" id="layer{layer_id}_bg_opacity">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -52,13 +60,13 @@
         <div class="col-xs-6">
             <div class="field">
                 <label>Text color</label>
-                <input type="color" class="form-control" name="layer{layer_id}_color" id="layer{layer_id}_color">
+                <input type="color" class="form-control text-layer-text-color-form-control" name="layer{layer_id}_color" id="layer{layer_id}_color">
             </div>
         </div>
         <div class="col-xs-6">
             <div class="field">
                 <label>Padding</label>
-                <input type="text" class="form-control" name="layer{layer_id}_padding" id="layer{layer_id}_padding">
+                <input type="text" class="form-control text-layer-padding-form-control" name="layer{layer_id}_padding" id="layer{layer_id}_padding">
             </div>
         </div>
     </div>
@@ -67,13 +75,13 @@
         <div class="col-xs-6">
             <div class="field">
                 <label>Font size</label>
-                <input type="text" class="form-control" name="layer{layer_id}_font_size" id="layer{layer_id}_font_size">
+                <input type="text" class="form-control text-layer-font-size-form-control" name="layer{layer_id}_font_size" id="layer{layer_id}_font_size">
             </div>
         </div>
         <div class="col-xs-6">
             <div class="field">
                 <label>Font family</label>
-                <input type="text" class="form-control" name="layer{layer_id}_font_family" id="layer{layer_id}_font_family">
+                <input type="text" class="form-control text-layer-font-family-form-control" name="layer{layer_id}_font_family" id="layer{layer_id}_font_family">
             </div>
         </div>
     </div>
@@ -88,7 +96,7 @@
         <div class="col-xs-6">
             <div class="field">
                 <label>Text alignment</label>
-                <select class="form-control" name="layer{layer_id}_text_align" id="layer{layer_id}_text_align">
+                <select class="form-control text-layer-text-align-form-control" name="layer{layer_id}_text_align" id="layer{layer_id}_text_align">
                     <option value="left">Left</option>
                     <option value="center">Center</option>
                     <option value="right">Right</option>
@@ -106,7 +114,7 @@
         <div class="col-xs-6">
             <div class="field">
                 <label>Border color</label>
-                <input type="color" class="form-control" name="layer{layer_id}_border_color" id="layer{layer_id}_border_color">
+                <input type="color" class="form-control text-layer-border-color-form-control" name="layer{layer_id}_border_color" id="layer{layer_id}_border_color">
             </div>
         </div>
     </div>
@@ -114,7 +122,7 @@
         <div class="col-xs-6">
             <div class="field">
                 <label>Border radius</label>
-                <input type="text" class="form-control" name="layer{layer_id}_border_radius" id="layer{layer_id}_border_radius">
+                <input type="text" class="form-control text-layer-border-radius-form-control" name="layer{layer_id}_border_radius" id="layer{layer_id}_border_radius">
             </div>
         </div>
 
@@ -135,13 +143,13 @@
         <div class="col-xs-6">
             <div class="field">
                 <label>Width</label>
-                <input value="" type="text" class="form-control" name="layer{layer_id}_width" id="layer{layer_id}_width">
+                <input value="" type="text" class="form-control image-layer-width-form-control" name="layer{layer_id}_width" id="layer{layer_id}_width">
             </div>
         </div>
         <div class="col-xs-6">
             <div class="field">
                 <label>Height</label>
-                <input value="" type="text" class="form-control" name="layer{layer_id}_height" id="layer{layer_id}_height">
+                <input value="" type="text" class="form-control image-layer-height-form-control" name="layer{layer_id}_height" id="layer{layer_id}_height">
             </div>
         </div>
     </div>
@@ -149,7 +157,7 @@
         <div class="col-xs-9">
             <div class="field">
                 <label>Image source url</label>
-                <input value="" type="text" class="form-control" name="layer{layer_id}_image_src" id="layer{layer_id}_image_src">
+                <input value="" type="text" class="form-control image-layer-image-src-form-control" name="layer{layer_id}_image_src" id="layer{layer_id}_image_src">
 
             </div>
         </div>
@@ -157,10 +165,10 @@
 </div>`;
     
     var BANNER_DESIGNER_INNER_HTML = `
-<div id="banner-designer">
-<div id="banner-designer-header" class="container">
+<div id="banner_designer">
+<div id="banner_designer_header" class="container">
     <h1 class="title page-title">Banner Maker</h1>
-    <p id="banner-designer-description">Drag and place the text blocks, add image background, change color and font families and design beautiful banners instantly!</p>
+    <p id="banner_designer_description">Drag and place the text blocks, add image background, change color and font families and design beautiful banners instantly!</p>
 </div>
 
 <div id="banner_designer_form_wrap" class="form">
@@ -168,7 +176,7 @@
         <input id="import_input" type="file" name="import" style="display:none">
         <div class="container">
             <div class="row">
-                <div id="banner-designer-form-left-side" class="col-xs-12 col-md-6">
+                <div id="banner_designer_form_left_side" class="col-xs-12 col-md-6">
                     <div class="field inline-field">Layer: <select class="form-control" id="layer_select"><option value="">-----</option></select></div> <div id="add_layer_btns"><div class="btn-group"><button id="add_text_layer_btn" type="button" class="btn btn-default">Add text layer</button><button id="add_image_layer_btn" type="button" class="btn btn-default">Add image layer</button></div></div>
                     <br>
 
@@ -337,7 +345,7 @@
             </div> <!-- row -->
         </div> <!-- /container -->
     </form>
-</div> <!-- /#banner-designer-controls -->
+</div> <!-- /#banner_designer-controls -->
 <div id="layer_dragged_container">Layer dragged: <span id="layer_dragged_full_name_text">-</span></div>
 
 <div id="banner_wrap">
@@ -348,6 +356,33 @@
 
 <div id="banner_bottom_actions"><button id="create_image_btn" type="button" href="#" class="btn btn-primary prepare">Convert to image</button><a id="download_image_btn_link" type="button" href="#" style="display: none" class="btn btn-success download" download="banner.png" href="#">Download Image</a><button id="import_btn" type="button" href="#" class="btn btn-success" href="#">Import</button><a id="export_btn" href="#" class="btn btn-success download" download="data.json" href="#">Export</a></div>
 </div>`;
+
+    var hexToRgb = function(hex) {
+      // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+      });
+
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      if (!result) return null;
+      
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    var addTransparencyToColor = function(color, transparency){
+        console.log('addTransparencyToColor', color, transparency);
+        if (transparency === undefined || transparency === null || transparency == 1)
+            return color;
+        
+        var rgb = hexToRgb(color);
+        color = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + transparency + ')';    
+        return color;
+    }
 
     var inherits = (function () {
         var F = function () {};
@@ -494,14 +529,6 @@
 
         banner_designer.$layerFormBox.append($layerForm);
 
-        this.positionOrder = positionOrder;
-        this.layerName = config.layer_name !== undefined ? config.layer_name: "";
-        this.$layerForm = $layerForm;
-        this.$layer = $layer;
-        this.$layerSelectOption = $layerSelectOption;
-        this.$layerTopInput = $layerTopInput;
-        this.$layerLeftInput = $layerLeftInput;
-
         $layerForm.$layerNameInput.on("input propertychange", function () {
             var layerName = $(this).val().trim();
 
@@ -513,6 +540,14 @@
 
         $layerSelectOption.insertAfter(banner_designer.$layerSelect.get(0).childNodes[0])
         banner_designer.$layerSelect.val(layerId);
+        
+        this.positionOrder = positionOrder;
+        this.layerName = config.layer_name !== undefined ? config.layer_name: "";
+        this.$layerForm = $layerForm;
+        this.$layer = $layer;
+        this.$layerSelectOption = $layerSelectOption;
+        this.$layerTopInput = $layerTopInput;
+        this.$layerLeftInput = $layerLeftInput;
     }
 
     Layer.prototype.fieldNames = null;
@@ -662,7 +697,7 @@
 
 
     var ImageLayer = function(banner_designer, config){
-        this.constructor.baseConstructor.call(this, banner_designer, config);
+        ImageLayer.baseConstructor.call(this, banner_designer, config);
     }
 
     inherits(ImageLayer, Layer);
@@ -771,12 +806,12 @@
     }
 
     var TextLayer = function(banner_designer, config){
-        this.constructor.baseConstructor.call(this, banner_designer, config);
+        TextLayer.baseConstructor.call(this, banner_designer, config);
     }
     inherits(TextLayer, Layer);
 
     TextLayer.prototype.layerType = "text";
-    TextLayer.prototype.fieldNames = ["text", "width", "text_align", "line_height", "padding", "border_width", "border_color", "border_radius", "color", "background_color", "bg_transparent", "font_size", "font_family"];
+    TextLayer.prototype.fieldNames = ["text", "width", "text_align", "line_height", "padding", "border_width", "border_color", "border_radius", "color", "background_color", "bg_opacity", "bg_transparent", "font_size", "font_family"];
 
     TextLayer.prototype.defaultValues = {
         "text": "Your text...",
@@ -805,6 +840,7 @@
         data.font_family = $layerForm.$font_family_input.val();
         data.background_color = $layerForm.$background_color_input.val();
         data.bg_transparent = $layerForm.$bg_transparent_input.is(":checked");
+        data.bg_opacity = $layerForm.$bg_opacity.val();
 
         return data;
     }
@@ -865,15 +901,37 @@
             $layer.css("background", "none");
         } else {
             if (config.background_color !== undefined ){
-                $layer.css("background-color", config.background_color);
+                var background_color = config.background_color;
+                
+                if (config.bg_opacity !== undefined){
+                    background_color = addTransparencyToColor(background_color, config.bg_opacity);
+                }
+
+                $layer.css("background-color", background_color);
             }
         }
         return $layer;
     }
+    
+    TextLayer.prototype.updateBackgroundColor = function(){
+        var $layerForm = this.$layerForm;
+        var $layer = this.$layer;
+        
+        if($layerForm.$bg_transparent_input.is(":checked")){
+            $layer.css("background","none");
+        } else {   
+            var backgroundColorWithoutTransparency = $layerForm.$background_color_input.val();
+            var bgOpacity = $layerForm.$bg_opacity_input.val();
 
+            var backgroundColor = addTransparencyToColor(backgroundColorWithoutTransparency, bgOpacity);
+    
+            $layer.css("background-color", backgroundColor);
+        }
+    }
+    
     TextLayer.prototype.initForm = function($layerForm, $layer, config){
         var self = this;
-        var text, width, background_color, bg_transparent;
+        var text, width, background_color, bg_transparent, bg_opacity;
 
         $layerForm.$text_input.on("input propertychange", function () {
             $layer.text($(this).val());
@@ -914,24 +972,19 @@
             }
         });
 
-
         var $background_color_input = $layerForm.$background_color_input;
-
         $background_color_input.on("change", function () {
-            if(!$bg_transparent_input.is(":checked")){
-                var backgroundColor = $background_color_input.val();
+            self.updateBackgroundColor();
+        });
 
-                $layer.css("background-color", backgroundColor);
-            }
+        var $bg_opacity_input = $layerForm.$bg_opacity_input;
+        $bg_opacity_input.on("change", function () {
+            self.updateBackgroundColor();
         });
 
         var $bg_transparent_input = $layerForm.$bg_transparent_input;
         $bg_transparent_input.on("change", function () {
-            if($(this).is(":checked")){
-                $layer.css("background","none");
-            } else {
-                $layer.css("background-color", $background_color_input.val());
-            }
+            self.updateBackgroundColor();
         });
 
         if (config.bg_transparent !== undefined ){
@@ -950,6 +1003,10 @@
             $background_color_input.val(config.background_color);
         }
 
+        if (config.bg_opacity !== undefined ){
+            $bg_opacity_input.val(config.bg_opacity);
+        }
+        /*
         if(bg_transparent){
             $layer.css("background","none");
         } else {
@@ -959,8 +1016,15 @@
                 background_color = $background_color_input.val();
             }
 
+            if (config.bg_opacity !== undefined ){
+                bg_opacity = config.bg_opacity;
+            } else {
+                bg_opacity = $bg_opacity_input.val();
+            }
+            
+            background_color = addTransparencyToColor(background_color, bg_opacity);
             $layer.css("background-color", background_color);
-        }
+        }*/
 
         this.__super__.initForm.call(this, $layerForm, $layer, config);
     }
@@ -1250,7 +1314,7 @@
 
         if (options.exportEnabled){
             this.$exportBtn.click(function(e){
-                // var data= $("#banner-designer-form").serializeArray();
+                // var data= $("#banner_designer_form").serializeArray();
 
                 var data = self.exportBanner();
                 var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 4));
@@ -1848,7 +1912,9 @@
     }
 
     BannerDesigner.prototype.importBanner = function(data){
-        //$("#banner-designer-form").deserialize(data);
+        //$("#banner_designer_form").deserialize(data);
+        if (!data) throw 'No data provided';
+        
         var self = this;
 
         this.reset();
